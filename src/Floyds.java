@@ -26,7 +26,7 @@ public class Floyds {
 
     private static void floyds(int[][] chart, int count) {
         if (count == 0) { print(count++, chart); }
-        chart = getShortestPath(chart, 0, 0, 0, count);
+        chart = getShortestPath(chart, count);
         print(count, chart);
         if (count == numVertices) {
             return; }
@@ -35,10 +35,10 @@ public class Floyds {
         }
     }
 
-    private static int[][] getShortestPath(int[][] chart, int i, int j, int k, int count) {
-        for (k = 0; k < count; k++) {
-            for (i = 0; i < numVertices; i++) {
-                for(j = 0; j < numVertices; j++) {
+    private static int[][] getShortestPath(int[][] chart, int count) {
+        for (int k = 0; k < count; k++) {
+            for (int i = 0; i < numVertices; i++) {
+                for(int j = 0; j < numVertices; j++) {
                     if (chart[i][j] == -1) {
                         if ((chart[i][k] != -1) && (chart[k][j] != -1)) {
                             chart[i][j] = chart[i][k] + chart[k][j];
