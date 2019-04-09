@@ -1,7 +1,7 @@
 import java.math.BigInteger;
 import java.util.Scanner;
 
-public class GCD
+public class GCD_16
 {
   private static BigInteger zero = new BigInteger("0");
   private static BigInteger one = new BigInteger("1");

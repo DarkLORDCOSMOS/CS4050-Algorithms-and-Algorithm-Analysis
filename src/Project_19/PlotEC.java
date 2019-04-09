@@ -7,6 +7,8 @@ Since we want a picture of the points on the curve,
 n will be small, so just use int values (not BigInteger)
 */
 
+package Project_19;
+
 import java.util.Scanner;
 import java.math.BigInteger;
 import java.io.*;
