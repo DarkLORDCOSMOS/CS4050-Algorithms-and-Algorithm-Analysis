@@ -1,5 +1,9 @@
+package Project_30;
+
 /*  basic application to be extended
 */
+
+// import javafx.scene.Camera;
 
 import javax.swing.*;
 import javax.swing.event.*;

@@ -1,3 +1,5 @@
+package Project_30;
+
 import java.util.Scanner;
 import java.math.BigInteger;
 
