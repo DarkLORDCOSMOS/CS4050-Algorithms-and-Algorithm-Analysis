@@ -7,24 +7,24 @@ import java.text.*;
 import java.util.*;
 import java.io.*;
 
-public class ManualSimplexBig extends Basic
+public class ManualSimplex extends Basic
 {
 
 //==================================================================================================
   // NOTE:  edit these constants appropriately to adjust for different displays
   
   // total size of the window in pixels
-  private static final int pixelWidth = 1200, pixelHeight = 700;  // total window size in pixels
+  private static final int pixelWidth = 1010, pixelHeight = 700;  // total window size in pixels
 
   // amount to shift drawing area to the right and down to not hit the title bar or window borders
   private static final int windowHorizOffset = 15, windowVertOffset = 50;
   private static final int bottomPixels = 10;
 
   // pixel dimension of each tableau cell, same for numbers and labels
-  private final static int pixelsHorizInCell = 180, pixelsVertInCell = 30;
+  private final static int pixelsHorizInCell = 110, pixelsVertInCell = 20;
 
   // fontsize for all text
-  private final static int TEXTSIZE = 24;
+  private final static int TEXTSIZE = 15;
 
   private static final Color rowLabelsColor = new Color( 100, 200, 200 );
   private static final Color rowLabelsBackColor = new Color( 200, 230, 230 );
@@ -54,7 +54,7 @@ public class ManualSimplexBig extends Basic
     else
       fname = args[0];
 
-    ManualSimplexBig ms = new ManualSimplexBig("Manual Simplex Method Tool", 0, 0, pixelWidth, pixelHeight, fname );
+    ManualSimplex ms = new ManualSimplex("Manual Simplex Method Tool", 0, 0, pixelWidth, pixelHeight, fname );
   }
 
   // instance variables for the application:
@@ -79,7 +79,7 @@ public class ManualSimplexBig extends Basic
 
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  public ManualSimplexBig( String title, int ulx, int uly, int pw, int ph, 
+  public ManualSimplex( String title, int ulx, int uly, int pw, int ph, 
                           String fname )
   {
     super(title,ulx,uly,pw,ph);
