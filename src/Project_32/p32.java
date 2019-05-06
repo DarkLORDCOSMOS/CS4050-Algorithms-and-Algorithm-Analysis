@@ -72,6 +72,9 @@ public class p32 {
                     if (j == 0) {
                         outputFile.print(1 + " ");
                     }
+                    else {
+                        outputFile.print("0 ");
+                    }
                 }
                 if (i == 1) {
                     if (j == 0) {
@@ -174,9 +177,9 @@ public class p32 {
                         outputFile.print("0 ");
                     }
                 }
-                else {
-                    outputFile.print("0 ");
-                }
+//                else {
+//                    outputFile.print("0 ");
+//                }
             }
             if (i == 2) {
 
