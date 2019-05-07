@@ -2,20 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8659aa55-8f4c-46cb-a181-db3c1f9be625" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Project_20/Decode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Project_20/Encode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Project_20/FindOtherPoint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Project_20/LineTool.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Project_20/PlotEC.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Project_20/PlotRealEC.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Project_20/PointECC.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Project_20/PointECC2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Project_20/graph.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Projects/Project_32/p32.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Projects/Project_32/p32.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Projects/Project_32/p32.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Projects/Project_32/p32.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project_32/p32.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project_32/p32.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Project_32/p32.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project_32/p32.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project_19/PointECC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project_19/PointECC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project_20/Book1.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project_20/Book1.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project_20/PointECC2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project_20/PointECC2.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -68,8 +57,8 @@
         <counts>
           <entry key="project.closed" value="1" />
           <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.open.time.4" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -86,13 +75,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="3546" />
+          <entry key="java" value="4471" />
           <entry key="txt" value="39" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="3546" />
+          <entry key="JAVA" value="4471" />
           <entry key="PLAIN_TEXT" value="39" />
         </counts>
       </usages-collector>
@@ -103,8 +92,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Project_20/PointECC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="281" selection-start-line="281" selection-end-line="284" selection-end-column="13" />
+            <state relative-caret-position="152">
+              <caret line="275" column="24" selection-start-line="275" selection-start-column="24" selection-end-line="275" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -112,19 +101,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Project_20/PointECC2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="647">
-              <caret line="290" column="12" lean-forward="true" selection-start-line="290" selection-start-column="12" selection-end-line="290" selection-end-column="12" />
+            <state relative-caret-position="237">
+              <caret line="279" column="52" selection-start-line="279" selection-start-column="52" selection-end-line="279" selection-end-column="52" />
               <folding>
-                <element signature="e#0#8806#0" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#1082#1083#0" expanded="true" />
-                <element signature="e#1121#1122#0" expanded="true" />
-                <element signature="e#1780#1781#0" expanded="true" />
-                <element signature="e#1809#1810#0" expanded="true" />
-                <element signature="e#2567#2568#0" expanded="true" />
-                <element signature="e#2591#2592#0" expanded="true" />
-                <element signature="e#2623#2624#0" expanded="true" />
-                <element signature="e#2647#2648#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -133,8 +113,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Project_19/PointECC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="261" column="48" lean-forward="true" selection-end-line="285" />
+            <state relative-caret-position="316">
+              <caret line="276" column="8" selection-start-line="276" selection-start-column="8" selection-end-line="276" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -177,7 +157,7 @@
         <entry file="file://$PROJECT_DIR$/src/Project_19/Decode.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
-              <caret line="19" column="44" lean-forward="true" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
+              <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -191,6 +171,7 @@
       <find>keys</find>
       <find>PointECC</find>
       <find>args</find>
+      <find>intvalue</find>
     </findStrings>
     <replaceStrings>
       <replace>PointECC</replace>
@@ -229,6 +210,7 @@
         <option value="$PROJECT_DIR$/src/Project_32/p32.java" />
         <option value="$PROJECT_DIR$/src/Project_20/Decode.java" />
         <option value="$PROJECT_DIR$/src/Project_20/PointECC.java" />
+        <option value="$PROJECT_DIR$/src/Project_19/PointECC.java" />
         <option value="$PROJECT_DIR$/src/Project_20/PointECC2.java" />
       </list>
     </option>
@@ -244,7 +226,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -274,6 +255,7 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -528,9 +510,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="974" height="1057" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26914662" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27461708" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Nl-Palette" order="3" />
@@ -540,8 +521,8 @@
       <window_info id="UI Designer" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3846154" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.47639486" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3846154" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.5633803" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
@@ -564,15 +545,26 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Project_20/PointECC2.java</url>
+          <line>285</line>
+          <properties />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="target" />
+        <watch expression="min.intValue()" />
         <watch expression="max.intValue()" />
         <watch expression="m.intValue()" />
-        <watch expression="max.intValue()" />
-        <watch expression="m.intValue()" />
-        <watch expression="BigInteger.valueOf((long) Math.pow(2, power) + 99)" />
-        <watch expression="BigInteger.valueOf((long) Math.pow(2, power))" />
+        <watch expression="min.intValue()" />
+        <watch expression="power.intValue()" />
+        <watch expression="Math.pow(2, power.intValue()) + 99)" />
+        <watch expression="Math.pow(2, power.intValue())" />
+        <watch expression="Math.pow(2, power.intValue()) + 99" />
       </configuration>
     </watches-manager>
   </component>
@@ -811,6 +803,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/math/MutableBigInteger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="2120" selection-start-line="2120" selection-end-line="2120" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Project_20/Encode.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -836,46 +835,30 @@
     <entry file="file://$PROJECT_DIR$/src/Project_19/Decode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="19" column="44" lean-forward="true" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_181/src.zip!/java/math/MutableBigInteger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="2120" selection-start-line="2120" selection-end-line="2120" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Project_19/PointECC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="261" column="48" lean-forward="true" selection-end-line="285" />
+          <caret line="19" column="44" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project_20/PointECC.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="281" selection-start-line="281" selection-end-line="284" selection-end-column="13" />
+        <state relative-caret-position="152">
+          <caret line="275" column="24" selection-start-line="275" selection-start-column="24" selection-end-line="275" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Project_19/PointECC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="276" column="8" selection-start-line="276" selection-start-column="8" selection-end-line="276" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Project_20/PointECC2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="647">
-          <caret line="290" column="12" lean-forward="true" selection-start-line="290" selection-start-column="12" selection-end-line="290" selection-end-column="12" />
+        <state relative-caret-position="237">
+          <caret line="279" column="52" selection-start-line="279" selection-start-column="52" selection-end-line="279" selection-end-column="52" />
           <folding>
-            <element signature="e#0#8806#0" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#1082#1083#0" expanded="true" />
-            <element signature="e#1121#1122#0" expanded="true" />
-            <element signature="e#1780#1781#0" expanded="true" />
-            <element signature="e#1809#1810#0" expanded="true" />
-            <element signature="e#2567#2568#0" expanded="true" />
-            <element signature="e#2591#2592#0" expanded="true" />
-            <element signature="e#2623#2624#0" expanded="true" />
-            <element signature="e#2647#2648#0" expanded="true" />
           </folding>
         </state>
       </provider>

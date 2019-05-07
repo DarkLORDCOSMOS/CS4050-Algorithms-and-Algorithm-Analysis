@@ -267,26 +267,59 @@ public class PointECC2 {
         String yString = keys.nextLine();
         PointECC2 p = new PointECC2( xString, yString );
         PointECC2 q = zero;
-        PointECC2 q1;
+        PointECC2 q1 = p;
         PointECC2 target = new PointECC2 (
                 "98333898174860222763621164809560426900902581988820015661720799616398614033468",
                 "60703462459530085880474331476429053299167650471903125187953999331805378093068"
         );
-        BigInteger m = BigInteger.ZERO;
+        BigInteger m = BigInteger.ONE;
+        BigInteger power = BigInteger.ZERO;
+        BigInteger min = BigInteger.valueOf((long) Math.pow(2, power.intValue()));
+        BigInteger max = BigInteger.valueOf((long) Math.pow(2, power.intValue()) + 99);
+
+        out("by scalar mult       " + m + "P= " + q1 );
+        out("");
+
 
         do {
-            if (q == target) {
+            if (power.intValue() == 63) {
+                System.out.println("It breaks here!!!");
+            }
+            if (q1.equals(target)) {
                 System.out.println("Target found!");
-                out("" + m + "P= " + q );
+                out("" + m + "P= " + q1 );
                 System.exit(0);
             }
-            q = q.add(p);
-            m = m.add( BigInteger.ONE );
-            q1 = p.scalarMult( m );
-            out("by repeated addings, " + m + "P= " + q );
-            out("by scalar mult           " + q1 );
+            else if ((m.compareTo(min) >= 0) && (m.compareTo(max) < 0)) {
+                m = m.add(BigInteger.ONE);
+                q1 = q1.add(p);
+            }
+            else if (m.compareTo(max) == 0) {
+                out("power = " + power);
+                power = power.add(BigInteger.ONE);
+                min = min.multiply(BigInteger.valueOf(2));
+                max = min.add(BigInteger.valueOf(99));
+                if (m.compareTo(min) == -1) {
+                    m = min;
+                    q1 = p.scalarMult( m );
+                }
+                else if (m.compareTo(max) < 0){
+                    m = m.add(BigInteger.ONE);
+                    q1 = q1.add(p);
+                }
+                else {
+                    m = m.multiply(BigInteger.valueOf(2));
+                    q1 = p.scalarMult( m );
+                }
+            }
+//            else if (m.intValue() == max.intValue()) {
+//                out("power = " + Math.pow(2, power.intValue()));
+//            }
+            // q = q.add(p);
+
+            out("by scalar mult       " + m + "P= " + q1 );
             out("");
-        } while ( ! q.equals( zero ) );
+        } while ( ! q1.equals( zero ) );
 
     }// main
 

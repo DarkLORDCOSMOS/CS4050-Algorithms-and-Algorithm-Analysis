@@ -273,8 +273,8 @@ public class PointECC {
 
      do { 
         q = q.add(p);
-            m = m.add( BigInteger.ONE );
-            q1 = p.scalarMult( m );
+        m = m.add( BigInteger.ONE );
+        q1 = p.scalarMult( m );
         out("by repeated addings, " + m + "P= " + q );
         out("by scalar mult           " + q1 );
         out("");
