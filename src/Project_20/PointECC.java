@@ -266,78 +266,51 @@ public class PointECC {
         out("Enter y for starting point P: ");
         String yString = keys.nextLine();
         PointECC p = new PointECC( xString, yString );
-        PointECC q = zero;
-        PointECC q1;
-        PointECC target = new PointECC(
+        PointECC q = p;
+        PointECC target = new PointECC (
                 "98333898174860222763621164809560426900902581988820015661720799616398614033468",
                 "60703462459530085880474331476429053299167650471903125187953999331805378093068"
         );
+        BigInteger m = BigInteger.ONE;
+        BigInteger power = BigInteger.ZERO;
+        BigInteger min = BigInteger.valueOf((long) Math.pow(2, power.intValue()));          // min = 2^0
+        BigInteger max = BigInteger.valueOf((long) Math.pow(2, power.intValue()) + 99);     // max = 2^0 + 99
 
-        BigInteger m = BigInteger.ZERO;
-        int power = 0;
-        BigInteger min = BigInteger.valueOf((long) Math.pow(2, power));
-        BigInteger max = BigInteger.valueOf((long) Math.pow(2, power) + 99);
+        out("starting point " + m + "P= " + q );
+        out("");
 
         do {
-            if (q == target) {
+            if (q.equals(target)) {                             // m found!
                 System.out.println("Target found!");
+                out("m=      " + m);
+                out("mP=     " + q );
+                out("target= " + target);
                 System.exit(0);
             }
-//            if (m.intValue() > min.intValue() && m.intValue() < max.intValue()) {
-//                System.out.println("by alice's trick " + m + "P= " + q);
-//            }
-            if (m.intValue() == max.intValue()) {
-                if (m.intValue() > min.intValue() && m.intValue() < max.intValue()) {
-                    System.out.println("by alice's trick " + m + "P= " + q);
-                }
-                power++;
-                min = BigInteger.valueOf((long) Math.pow(2, power));
-                max = BigInteger.valueOf((long) Math.pow(2, power) + 99);
-                if (m.intValue() < min.intValue()) {
-                    m = min;
-                    q = p.scalarMult(m);
-//                    if (m.intValue() > min.intValue() && m.intValue() < max.intValue()) {
-//                        System.out.println("by alice's trick " + m + "P= " + q);
-//                    }
-
-                    if (q == target) {
-                        System.out.println("Target found!");
-                        System.exit(0);
-                    }
-                    continue;
-                }
-//                if (!(m.intValue() == Math.pow(2, power) + 99)) {
-//                    m = m.add( BigInteger.ONE );
-//                    q = q.add(p);
-//                }
-//                else {
-//                    m = m.multiply(BigInteger.valueOf(2));
-//                    q = p.scalarMult( m );
-//                }
-            }
-            else {
-                if (m.intValue() > min.intValue() && m.intValue() < max.intValue()) {
-                    System.out.println("by alice's trick " + m + "P= " + q);
-                }
-                m = m.add( BigInteger.ONE );
+            else if ((m.compareTo(min) >= 0) && (m.compareTo(max) < 0)) {   // potential m within range
+                m = m.add(BigInteger.ONE);
                 q = q.add(p);
+                out("by addition " + m + "P= " + q );
+                out("");            }
+            else if (m.compareTo(max) == 0) {                   // max m for range
+                out("power = " + power);
+                power = power.add(BigInteger.ONE);
+                min = min.multiply(BigInteger.valueOf(2));
+                max = min.add(BigInteger.valueOf(99));
+                if (m.compareTo(min) < 0) {                     // m less than new min
+                    m = min;                                    // m = next power of 2
+                    q = p.scalarMult( m );
+                    out("by power of 2 " + m + "P= " + q );
+                    out("");
+                }
+                else if (m.compareTo(max) < 0){                 // m less than new max
+                    m = m.add(BigInteger.ONE);                  // m = m + 1
+                    q = q.add(p);
+                    out("by addition " + m + "P= " + q );
+                    out("");
+                }
             }
-//            if (m.intValue() == Math.pow(2, power)) {
-//                System.out.println("m = " + m + " 2^" + power + " = " + Math.pow(2, power));
-//            }
-//            if (q == target) {
-//                System.out.println("Target found!");
-//                System.exit(0);
-//            }
-//            if (m.intValue() > min.intValue() && m.intValue() < max.intValue()) {
-//                System.out.println("by alice's trick " + m + "P= " + q);
-//            }
 
-            // q1 = p.scalarMult( m );
-            // System.out.println("by repeated addings, " + m + "P= " + q);
-//            out("by repeated addings, " + m + "P= " + q );
-//            out("by scalar mult           " + q1 );
-//            out("");
         } while ( ! q.equals( zero ) );
 
     }// main
