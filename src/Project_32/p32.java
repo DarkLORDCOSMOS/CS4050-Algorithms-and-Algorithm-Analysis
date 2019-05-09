@@ -8,7 +8,7 @@ public class p32 {
     public static void main(String[] args) throws IOException {
         double cx, cy, vx, vy, dx, dy, wx, wy;
         int a1x, a1y, a2x, a2y, a3x, a3y, b1x, b1y, b2x, b2y, b3x, b3y, b4x, b4y;
-        String[] headers = {"la", "mu1", "mu2", "mu3", "v1", "v2", "v3", "v4", "rhs"};
+        String[] headers = {"z", "la", "mu1", "mu2", "mu3", "nu1", "nu2", "nu3", "nu4", "s1", "s2", "s3", "s4", "rhs"};
         int rows, columns;
         // String[] headers;
         Scanner input = new Scanner( System.in );
@@ -45,12 +45,11 @@ public class p32 {
         System.out.print("Enter y for velocity vector, w: ");
         wy = input.nextDouble();
 
-
         outputFile.println(rows + " " + columns);
 
         for (int i = 1; i < rows; i ++) {
             if (i == 1) {
-                outputFile.println("la");
+                outputFile.println("z");
             }
             outputFile.println("-");
         }
@@ -72,34 +71,49 @@ public class p32 {
                     if (j == 0) {
                         outputFile.print(1 + " ");
                     }
+                    else if (j == columns - 5) {
+                        outputFile.print(1 + " ");
+                    }
+                    else if (j == columns - 4) {
+                        outputFile.print(1 + " ");
+                    }
+                    else if (j == columns - 3) {
+                        outputFile.print(1 + " ");
+                    }
+                    else if (j == columns - 2) {
+                        outputFile.print(1 + " ");
+                    }
                     else {
                         outputFile.print("0 ");
                     }
                 }
                 if (i == 1) {
-                    if (j == 0) {
+                    if (j == 1) {
                         outputFile.print(((int) (vx - wx)) + " ");
                     }
-                    else if (j == 1) {
+                    else if (j == 2) {
                         outputFile.print(a1x + " ");
                     }
-                    else if (j == 2) {
+                    else if (j == 3) {
                         outputFile.print(a2x + " ");
                     }
-                    else if (j == 3) {
+                    else if (j == 4) {
                         outputFile.print(a3x + " ");
                     }
-                    else if (j == 4) {
+                    else if (j == 5) {
                         outputFile.print(b1x + " ");
                     }
-                    else if (j == 5) {
+                    else if (j == 6) {
                         outputFile.print(b2x + " ");
                     }
-                    else if (j == 6) {
+                    else if (j == 7) {
                         outputFile.print(b3x + " ");
                     }
-                    else if (j == 7) {
+                    else if (j == 8) {
                         outputFile.print(b4x + " ");
+                    }
+                    else if (j == 9) {
+                        outputFile.print(1 + " ");
                     }
                     else if (j == columns - 1) {
                         outputFile.print(((int) (dx - cx)) + " ");
@@ -109,29 +123,32 @@ public class p32 {
                     }
                 }
                 else if (i == 2) {
-                    if (j == 0) {
+                    if (j == 1) {
                         outputFile.print(((int) (vy - wy)) + " ");
                     }
-                    else if (j == 1) {
+                    else if (j == 2) {
                         outputFile.print(a1y + " ");
                     }
-                    else if (j == 2) {
+                    else if (j == 3) {
                         outputFile.print(a2y + " ");
                     }
-                    else if (j == 3) {
+                    else if (j == 4) {
                         outputFile.print(a3y + " ");
                     }
-                    else if (j == 4) {
+                    else if (j == 5) {
                         outputFile.print(b1y + " ");
                     }
-                    else if (j == 5) {
+                    else if (j == 6) {
                         outputFile.print(b2y + " ");
                     }
-                    else if (j == 6) {
+                    else if (j == 7) {
                         outputFile.print(b3y + " ");
                     }
-                    else if (j == 7) {
+                    else if (j == 8) {
                         outputFile.print(b4y + " ");
+                    }
+                    else if (j == 10) {
+                        outputFile.print(1 + " ");
                     }
                     else if (j == columns - 1) {
                         outputFile.print(((int) (dy - cy)) + " ");
@@ -141,13 +158,16 @@ public class p32 {
                     }
                 }
                 else if (i == 3) {
-                    if (j == 1) {
-                        outputFile.print(1 + " ");
-                    }
-                    else if (j == 2) {
+                    if (j == 2) {
                         outputFile.print(1 + " ");
                     }
                     else if (j == 3) {
+                        outputFile.print(1 + " ");
+                    }
+                    else if (j == 4) {
+                        outputFile.print(1 + " ");
+                    }
+                    else if (j == 11) {
                         outputFile.print(1 + " ");
                     }
                     else if (j == columns - 1) {
@@ -158,16 +178,19 @@ public class p32 {
                     }
                 }
                 else if (i == 4) {
-                    if (j == 4) {
-                        outputFile.print(1 + " ");
-                    }
-                    else if (j == 5) {
+                    if (j == 5) {
                         outputFile.print(1 + " ");
                     }
                     else if (j == 6) {
                         outputFile.print(1 + " ");
                     }
                     else if (j == 7) {
+                        outputFile.print(1 + " ");
+                    }
+                    else if (j == 8) {
+                        outputFile.print(1 + " ");
+                    }
+                    else if (j == 12) {
                         outputFile.print(1 + " ");
                     }
                     else if (j == columns - 1) {
