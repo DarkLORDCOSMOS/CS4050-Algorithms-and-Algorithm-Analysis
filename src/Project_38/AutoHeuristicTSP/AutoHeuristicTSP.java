@@ -3,8 +3,6 @@
    (user still has to enter cuts, branches, and notice tours)
 */
 
-package Project_38;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.text.*;

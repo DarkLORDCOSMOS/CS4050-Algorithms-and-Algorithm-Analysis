@@ -1,5 +1,3 @@
-package Project_38;
-
 /*  basic application to be extended
 */
 

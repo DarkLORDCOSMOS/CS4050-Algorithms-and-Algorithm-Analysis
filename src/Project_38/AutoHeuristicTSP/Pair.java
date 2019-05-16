@@ -1,5 +1,3 @@
-package Project_38;
-
 /*
   tiny utility class
   to hold (k,j)

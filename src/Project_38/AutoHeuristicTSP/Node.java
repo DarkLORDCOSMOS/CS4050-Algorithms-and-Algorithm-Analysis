@@ -1,5 +1,3 @@
-package Project_38;
-
 /*
    a node of the branch and bound tree
    for AutoHeuristicTSP
