@@ -1,6 +1,4 @@
-package Project_38;
-
-/*
+/* 
     simple (all stored in one 2D array) tableau
     for simplex method
 */
@@ -97,13 +95,11 @@ public class Tableau
 
   // (end Version 2 additional methods)****************
 
-  // construct tableau from node
-  public Tableau( Node node )
-  {
-/*
+  public Tableau( String format, Scanner input, int halter ){
+
     // prepare TeX output file for later possible use
     try{
-      out = new PrintWriter( new File( "tempreport.tex" ) );
+      out = new PrintWriter( new File( "tempReport.tex" ) );
 
       // prepare stand-alone document for convenience
       out.println("\\input pictex");
@@ -112,27 +108,75 @@ public class Tableau
     }
     catch(Exception e)
     {
-      System.out.println("crazy---couldn't open tempreport.tex?");
+      System.out.println("crazy---couldn't open tempReport.tex?");
       System.exit(1);
       out = null;
     }
-*/
 
     // Version 2:
     setToZero = new ArrayList<String>();
     setToOne = new ArrayList<String>();
 
-    haltStep = 10000;
+    haltStep = halter;
 
     a = new double[MAXROWS][MAXCOLS];
     rowLabels = new String[MAXROWS];
     colLabels = new String[MAXCOLS];
 
-    // build the base tableau (before any cuts or branches)
+    if( format.equals( "raw" ) ){
+      numRows = input.nextInt();  numCols = input.nextInt();  input.nextLine();
 
-    pts = AutoHeuristicTSP.points;
-    n = pts.length;
+      // read a label for each row:
+      for( int k=0; k<numRows; k++ ){
+        rowLabels[k] = input.nextLine();
+        System.out.println( rowLabels[k] );
+      }
 
+      // read a label for each col:
+      for( int k=0; k<numCols; k++ ){
+        colLabels[k] = input.nextLine();
+        System.out.println( colLabels[k] );
+      }
+
+      for( int r=0; r<numRows; r++ ){
+        for( int c=0; c<numCols; c++ ){
+          a[r][c] = input.nextDouble();
+          System.out.print( a[r][c] + " " );
+        }
+        System.out.println();
+      }
+
+    }// raw format
+
+    else if( format.equals( "tsp" ) )
+    {// build tableau from info in the file
+
+      // build the base tableau (before any cuts or branches)
+
+      // read points data from input
+
+      n = input.nextInt();  input.nextLine();
+
+      String frmt = input.nextLine();
+
+      if( ! frmt.equals( "points" ) )
+      {
+        System.out.println("Data file must have \"points\" after # of points");
+        System.exit(1);
+      }
+
+      pts = new double[ n ][2];
+
+      for( int k=0; k<n; k++ )
+      {
+        pts[k][0] = input.nextDouble();
+        pts[k][1] = input.nextDouble();
+      }
+
+      // prepare for reading command lines later
+      if( input.hasNextLine() )
+        input.nextLine();  
+      
       // now build the tableau:
       //        z  ak    sij         
       int tspVars = (n*(n-1))/2;
@@ -142,7 +186,7 @@ public class Tableau
       //   (put rhs in separately at the end)
       numCols = 1 + tspVars + tspVars + n;
 
-// System.out.println("tableau size before processing commands: " + numRows + " " + numCols );
+System.out.println("tableau size before processing commands: " + numRows + " " + numCols );
 
       rowLabels[0] = "z";  // obj func row
       a[0][0] = 1;         // z as the permanent basic var for row 0
@@ -190,62 +234,99 @@ public class Tableau
           count++;  // get ready for next square
         }
 
+      // now read commands and arguments until there aren't any
+      // more, each command adding a row and column to the tableau and rhs
+      // Version 2:  for zero and one commands, just note variable name
+      //             for later changing of tableau
+
       int lastSurplus = 1;  // haven't had any s_k type variables yet
       int lastArtificial = n+1;  // a1...an are artificial vars already used
 
-      for( int cutNum=0; cutNum<node.cuts.size(); cutNum++ )
-      {// create tableau stuff for this cut
+      while( input.hasNextLine() )
+      {
+        String line = input.nextLine();
+        System.out.println("read command line: " + line );
+        StringTokenizer st = new StringTokenizer( line );
 
-        // get the points for the cut
-        ArrayList<Integer> s = node.cuts.get( cutNum );
+        String command;
+        if( st.hasMoreTokens() )
+          command = st.nextToken();
+        else
+          command = "";
 
-        // for each k in S and j not in S, add in 1 in xk,j
-        for( int kIndex=0; kIndex<s.size(); kIndex++ )
-        {
-          int k = s.get(kIndex);
-          for( int j=1; j<=n; j++ )
+        
+        if( command.equals("") )
+        {// ignore a blank line
+        }
+
+        else if( command.equals( "cut" ) )
+        {// add row and col to put in cut constraint
+          // read all the point indices forming S
+          ArrayList<Integer> s = new ArrayList<Integer>();
+          while( st.hasMoreTokens() )
           {
-            if( ! s.contains( j ) )
-            {// j not in S, add xk,j coefficient
-              a[numRows][ getDecVar( k, j )] = 1;       
-            }// for j not in S
-          }// for each j in 1..n
-        }// for each k in S
+            String w = st.nextToken();
+            s.add( Integer.parseInt( w ) );
+          }
 
-        // build the rest of the tableau for new row and col
-        rhs[ numRows ] = 2;
-        rowLabels[ numRows ] = "a" + lastArtificial;
-        colLabels[ numCols ] = "s" + lastSurplus;
-        a[ numRows ][ numCols ] = -1;  // coeff for new surplus variable
-        numCols++;
-        colLabels[ numCols ] = "a" + lastArtificial;
-        a[ numRows ][ numCols ] = 1;  // coeff for new artificial variable
+          // for each k in S and j not in S, add in 1 in xk,j
+          for( int kIndex=0; kIndex<s.size(); kIndex++ )
+          {
+            int k = s.get(kIndex);
+            for( int j=1; j<=n; j++ )
+            {
+              if( ! s.contains( j ) )
+              {// j not in S, add xk,j coefficient
+                a[numRows][ getDecVar( k, j )] = 1;       
+              }// for j not in S
+            }// for each j in 1..n
+          }// for each k in S
 
-        // update numRows, numCols, last vars
-        numRows++;
-        numCols++;
-        lastSurplus++;
-        lastArtificial++;
+          // build the rest of the tableau for new row and col
+          rhs[ numRows ] = 2;
+          rowLabels[ numRows ] = "a" + lastArtificial;
+          colLabels[ numCols ] = "s" + lastSurplus;
+          a[ numRows ][ numCols ] = -1;  // coeff for new surplus variable
+          numCols++;
+          colLabels[ numCols ] = "a" + lastArtificial;
+          a[ numRows ][ numCols ] = 1;  // coeff for new artificial variable
 
-      }// create tableau stuff for this cut
+          // update numRows, numCols, last vars
+          numRows++;
+          numCols++;
+          lastSurplus++;
+          lastArtificial++;
 
-      // now process zeros and add to list zeros
-      for( int m=0; m<node.zeros.size(); m++ )
-      {// process zero command number m
-        int k = node.zeros.get( m ).first;
-        int j = node.zeros.get( m ).second;
+        }// cut
+
+        else if( command.equals( "zero" ) || command.equals( "one" ) )
+        {// Version 2:  don't change tableau yet, just add to lists:
+
+          // read the two indices k and j specifying xk,j to be set to 0 or 1
+
+          int k = Integer.parseInt(st.nextToken());
+          int j = Integer.parseInt(st.nextToken());
           
-        setToZero.add( "x" + k + "," + j );
-      }// process zero command number m
+          // make sure they are in order k < j (Version 2 incidental improvement):
+          if( k > j )
+          {
+            int temp = k;
+            k = j;
+            j = temp;
+          }
 
-      // now process ones and add to list ones
-      for( int m=0; m<node.ones.size(); m++ )
-      {// process one command number m
-        int k = node.ones.get( m ).first;
-        int j = node.ones.get( m ).second;
-          
-        setToOne.add( "x" + k + "," + j );
-      }// process one command number m
+          if( command.equals( "zero" ) )
+          {
+            setToZero.add( "x" + k + "," + j );
+          }
+          else
+          {// command "one"
+            setToOne.add( "x" + k + "," + j );
+          }
+
+        }// zero or one
+
+      }// read next command and arguments
 
       // copy rhs into last column of a
       numCols++;  // make room for rhs column
@@ -255,13 +336,16 @@ public class Tableau
       for( int r=0; r<numRows; r++ )
         a[ r ][ numCols-1 ] = rhs[ r ];
 
-//      show( "After building tsp format");
+      show( "After building tsp format");
       
-//      System.out.println("tableau size: " + numRows + " " + numCols );
+      System.out.println("tableau size: " + numRows + " " + numCols );
 
       // ***********************
       // Version 2:  now change the tableau to take into account
       //             any zero or one commands
+
+      System.out.println(
+          "Version 2:  adjust tableau to reflect zero, one commands:");
 
       // adjust for zero commands:
       for( int k=0; k<setToZero.size(); k++ )
@@ -296,6 +380,7 @@ public class Tableau
             System.exit(0);
           }
         }
+ 
 
         removeColumn( col );
         var = "s" + var.substring( 1 );
@@ -306,9 +391,11 @@ public class Tableau
 
       }// remove column xk,j and sk,j and row for sk,j and adjust rhs
       
-      // toTeX( "Initial tableau after commands processed" );
-      // finishTeX();
+      toTeX( "Initial tableau after commands processed" );
+      finishTeX();
       // (end of Version 2 changes here) ***********************
+
+    }// tsp format
 
     // store original tableau for later checking that equality constraints
     // are satisfied
@@ -321,8 +408,125 @@ public class Tableau
         aOrig[r][c] = a[r][c];
     }
 
-  }// constructor from node and points
+  }// constructor
 
+  // build n random points to form tsp
+  public Tableau( Random rng, int n, int halter )
+  {
+    // not used, but avoid crash
+    setToZero = new ArrayList<String>();
+    setToOne = new ArrayList<String>();
+
+    haltStep = halter;
+
+    a = new double[MAXROWS][MAXCOLS];
+    rowLabels = new String[MAXROWS];
+    colLabels = new String[MAXCOLS];
+
+      // build the base tableau (before any cuts or branches)
+
+      pts = new double[ n ][2];
+
+      for( int k=0; k<n; k++ )
+      {
+        pts[k][0] = rng.nextInt(99) + 1;
+        pts[k][1] = rng.nextInt(99) + 1;
+      }
+
+      // save data file
+      try{
+        PrintWriter output = new PrintWriter( new File( "randomTest" ) );
+        output.println( n );
+        output.println( "points" );
+
+        for( int k=0; k<n; k++ )
+          output.println( (int) (pts[k][0]) + " " + (int) (pts[k][1]) );
+           
+        output.close();
+      }
+      catch(Exception e)
+      {
+        System.out.println("failed to construct random TSP problem");
+        System.exit(1);
+      }
+
+      // now build the tableau:
+      //        z  ak    sij         
+      int tspVars = (n*(n-1))/2;
+
+      numRows = 1 + n + tspVars;
+      //        z  xij  sij ak
+      //   (put rhs in separately at the end)
+      numCols = 1 + tspVars + tspVars + n;
+
+System.out.println("tableau size before processing commands: " + numRows + " " + numCols );
+
+      rowLabels[0] = "z";  // obj func row
+      a[0][0] = 1;         // z as the permanent basic var for row 0
+
+      colLabels[ 0 ] = "z";
+
+      // put rhs values in special storage, place in a[...][numCols-1] at end
+      double[] rhs = new double[MAXROWS];
+      
+      // fill in rows 1 through n except for the xij part
+      for( int r=1; r<=n; r++ )  // the core constraints
+      {
+        rowLabels[ r ] = "a" + r;
+        a[ r ][ 2*tspVars + r ] = 1;
+        rhs[ r ] = 2;
+
+        colLabels[ 2*tspVars + r ] = "a" + r;
+      }
+
+      // move through 2D chart of all pairs of points to
+      // fill in rest of table
+      int count = 0;  // number of previous spots in the 2D chart
+      for( int k=1; k<n; k++ )
+        for( int j=k+1; j<=n; j++ )
+        {// fill in everything needed for x_k,j
+          int row = n+1+count;
+
+          // fill in the skj rows
+          rowLabels[ row ] = "s" + k + "," + j;
+          a[ row ][ 1+count ] = 1;
+          a[ row ][ tspVars+1 + count ] = 1;
+
+          rhs[ row ] = 1;
+
+          colLabels[ count+1 ] = "x" + k + "," + j;
+          colLabels[ tspVars + 1 + count ] = "s" + k + "," + j;
+
+          // fill in the ckj in obj func row
+          a[0][ count+1 ] = dist( k, j );
+
+          // fill in xkj coeffs in first n constraints:
+          a[ k ][ count+1 ] = 1;
+          a[ j ][ count+1 ] = 1;
+
+          count++;  // get ready for next square
+        }
+
+      // copy rhs into last column of a
+      numCols++;  // make room for rhs column
+
+      colLabels[ numCols-1 ] = "rhs";
+
+      for( int r=0; r<numRows; r++ )
+        a[ r ][ numCols-1 ] = rhs[ r ];
+
+   // store original tableau for later checking that equality constraints
+    // are satisfied
+    //   (aOrig includes obj func row, which is not checked, and rhs)
+    aOrig = new double[MAXROWS][MAXCOLS];
+
+    for( int r=0; r<numRows; r++ )
+    {
+      for( int c=0; c<numCols; c++ )
+        aOrig[r][c] = a[r][c];
+    }
+
+  }// constructor
 
   public void show( String label )
   {
@@ -468,9 +672,9 @@ public class Tableau
     }
     a[0][0] = 1;  // permanent z coefficient
 
-//    System.out.println("Begin Phase 1=================================");
+    System.out.println("Begin Phase 1=================================");
 
-//    export( 1 );
+    export( 1 );
 
     // price out for phase 1 
     // (just for simplicity, price out all basic vars instead
@@ -488,7 +692,7 @@ public class Tableau
         {
           pc = c;
           found = true;
-//        System.out.println("price out " + colLabels[c] );
+System.out.println("price out " + colLabels[c] );
         }
       }
 
@@ -551,7 +755,7 @@ public class Tableau
     for( int c=0; c<numCols; c++ )
       a[0][c] = phase2ObjFunc[ c ];
 
-//    System.out.println("Begin Phase 2=================================");
+    System.out.println("Begin Phase 2=================================");
 
     // price out for phase 2
     for( int pr=1; pr<numRows; pr++ )
@@ -582,7 +786,7 @@ public class Tableau
 
     // export priced out phase 2 tableau so can manually
     // check (a serious debugging step)
-//    export( 2 );
+    export( 2 );
 
     // do pivot steps until reach phase 2 optimal tableau
     foundNeg = true;
@@ -605,12 +809,15 @@ public class Tableau
     }while( foundNeg && stepNumber < haltStep );
 
     if( !foundNeg )
-    {
-    //  System.out.println("Found optimal point in Phase 2");
-    }
+      System.out.println("Found optimal point in Phase 2");
 
     // export( 3 );
 
+  }
+
+  public double[][] getPoints()
+  {
+    return pts;
   }
 
   public String[] getBasicVariableNames()
@@ -644,7 +851,6 @@ public class Tableau
   // and update basic variable for the pivot row
   public void pivot( int pr, int pc, boolean phase1 )
   {
-    System.out.print(".");
     stepNumber++;
 
 // if( stepNumber == 19 )
@@ -663,16 +869,15 @@ public class Tableau
           a[r][c] -= val * a[pr][c];
       }
 
-//    System.out.println("------- pivot step: " + stepNumber + 
-//                         " obj func = " + a[0][numCols-1] +
-//                        ", " +
-//                        rowLabels[pr] + " leaves, " +
-//                        colLabels[pc] + " enters" );
+    System.out.println("------- pivot step: " + stepNumber + 
+                         " obj func = " + a[0][numCols-1] +
+                        ", " +
+                        rowLabels[pr] + " leaves, " +
+                        colLabels[pc] + " enters" );
 
     // update basic variable
     rowLabels[pr] = colLabels[pc];
 
-/*
     // debug output---show basic vars and values for all rows
     for( int r=0; r<numRows; r++ )
       if( rowLabels[r].charAt(0) == 'x' )
@@ -695,7 +900,6 @@ public class Tableau
       {// just display all other kinds of variables
         System.out.printf("%10s %20.10f\n", rowLabels[r], a[r][numCols-1] );
       }
-*/
 
     // form vector of all variable values---spot 0 is first (omitting z)
     // and rhs not included
@@ -893,7 +1097,7 @@ public class Tableau
   private void export( int tabNumber )
   {
     try{
-      PrintWriter output = new PrintWriter( new File( "tempexport" + tabNumber ) );
+      PrintWriter output = new PrintWriter( new File( "tempExport" + tabNumber ) );
       
       output.println( numRows + " " + numCols );
 
@@ -921,6 +1125,22 @@ public class Tableau
 
   public static void main(String[] args) throws Exception
   {
+    String fileName = FileBrowser.chooseFile( true );
+    Scanner input = new Scanner( new File( fileName ) );
+    Tableau table = new Tableau( "tsp", input, 100000 );
+
+    table.toTeX("initial tableau in Tableau.main:" );
+
+    table.doSimplexMethod();
+
+    table.finishTeX();
+
+    String[] names = table.getBasicVariableNames();
+    double[] values = table.getBasicVariableValues();
+
+    System.out.println("Optimal values:");
+    for( int r=0; r<names.length; r++ )
+      System.out.printf("%10s %20.10f\n", names[r], values[r] );
   }
 
 }
