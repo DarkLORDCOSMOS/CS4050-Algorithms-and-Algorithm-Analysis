@@ -8,7 +8,7 @@ public class p32 {
     public static void main(String[] args) throws IOException {
         double cx, cy, vx, vy, dx, dy, wx, wy;
         int a1x, a1y, a2x, a2y, a3x, a3y, b1x, b1y, b2x, b2y, b3x, b3y, b4x, b4y;
-        String[] headers = {"z", "la", "mu1", "mu2", "mu3", "nu1", "nu2", "nu3", "nu4", "s1", "s2", "s3", "s4", "rhs"};
+        String[] headers = {"z", "la", "mu1", "mu2", "mu3", "nu1", "nu2", "nu3", "nu4", "a1", "a2", "a3", "a4", "rhs"};
         int rows, columns;
         // String[] headers;
         Scanner input = new Scanner( System.in );
